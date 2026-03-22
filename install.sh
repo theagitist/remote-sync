@@ -72,4 +72,8 @@ EOF
 # Load agent
 launchctl load "$PLIST_DEST"
 echo "Loaded launchd agent: $PLIST_NAME"
+
+# Deploy helpers to remotes
+"$BIN_LINK" --deploy
+
 echo "Remote sync is now running."
