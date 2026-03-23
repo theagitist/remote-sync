@@ -30,6 +30,28 @@ case "${1:-}" in
         COUNT=$(list_files | wc -l)
         echo "$COUNT files"
         ;;
+    --view)
+        if ! command -v viu &>/dev/null; then
+            echo "Error: 'viu' is not installed. Install it with: cargo install viu"
+            exit 1
+        fi
+        TARGET="${2:-latest}"
+        if [ "$TARGET" = "latest" ]; then
+            FILE=$(list_files | head -n 1)
+            if [ -z "$FILE" ]; then
+                echo "No files found."
+                exit 1
+            fi
+        else
+            FILE="$TARGET"
+        fi
+        FILEPATH="$SYNC_DIR/$FILE"
+        if [ ! -f "$FILEPATH" ]; then
+            echo "File not found: $FILEPATH"
+            exit 1
+        fi
+        viu "$FILEPATH"
+        ;;
     *)
         cat <<USAGE
 Usage: $(basename "$0") <command>
@@ -39,6 +61,7 @@ Commands:
   --today         Show files modified today
   --search TERM   Find files by name
   --count         Show total number of files
+  --view [FILE]   View an image in the terminal (default: latest)
 
 Set REMOTE_SYNC_DIR to override the sync directory (defaults to script location).
 USAGE
