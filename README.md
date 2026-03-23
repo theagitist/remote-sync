@@ -74,6 +74,8 @@ Then on the target server, from the sync directory:
 ./rsh.sh --today         # Files modified today
 ./rsh.sh --search term   # Find files by name
 ./rsh.sh --count         # Total number of files
+./rsh.sh --view          # View the latest image in the terminal (requires viu)
+./rsh.sh --view foo.png  # View a specific image
 ```
 
 ## Uninstall
