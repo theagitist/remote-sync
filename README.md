@@ -1,72 +1,14 @@
-# remote-sync
+# rsh
 
-Automatically sync a local folder to one or more remote servers via SSH. Uses `fswatch` to detect changes and `rsync` to mirror files — including deletions.
-
-Runs on **macOS** as the source machine (uses launchd and macOS notifications). The remote target can be **any OS** that supports SSH and rsync (Linux, BSD, etc.).
+Helper commands for browsing and viewing files on a remote server from the terminal.
 
 ## Requirements
 
-**Source (macOS):**
-- [Homebrew](https://brew.sh)
-- SSH key-based access to your remote server(s)
-
-**Target (any OS):**
-- SSH server
-- `rsync` installed
-
-## Install
-
-```bash
-brew install fswatch terminal-notifier
-
-git clone https://github.com/theagitist/remote-sync.git
-cd remote-sync
-
-cp .config.example .config
-# Edit .config with your local path and remote destination(s)
-
-./install.sh
-```
-
-The install script will:
-- Symlink the sync script to `~/.local/bin/`
-- Generate and load a launchd agent that keeps it running
-- Lock `.config` permissions to owner-only (600)
-
-## Configuration
-
-Edit `.config` with your paths:
-
-```bash
-# Absolute path to the local folder to watch
-LOCAL_DIR="/path/to/your/folder/"
-
-# One or more remote destinations (SSH + rsync)
-REMOTE_DIRS=(
-    "user@server1.com:/path/to/folder/"
-    "user@server2.com:/path/to/folder/"
-)
-```
+- `viu` (optional, for `--view`) — install with `cargo install viu`
 
 ## Usage
 
-The sync runs automatically in the background. You can also use:
-
-```bash
-remote-sync.sh --once          # One-off sync without the watcher
-remote-sync.sh --status        # Agent status and last sync time
-remote-sync.sh --deploy        # Deploy helper scripts to all remotes
-```
-
-### Target helpers
-
-Deploy helper scripts to your remote servers:
-
-```bash
-remote-sync.sh --deploy
-```
-
-Then on the target server, from the sync directory:
+Place `rsh.sh` in the directory you want to browse, then:
 
 ```bash
 ./rsh.sh --last          # Most recent filename
@@ -78,11 +20,7 @@ Then on the target server, from the sync directory:
 ./rsh.sh --view foo.png  # View a specific image
 ```
 
-## Uninstall
-
-```bash
-./uninstall.sh
-```
+Set `REMOTE_SYNC_DIR` to override the target directory (defaults to the script's location).
 
 ## License
 

@@ -1,8 +1,0 @@
-# Absolute path to the local folder to watch
-LOCAL_DIR="/path/to/your/folder/"
-
-# One or more remote destinations (SSH + rsync)
-REMOTE_DIRS=(
-    "user@server1.com:/path/to/folder/"
-    "user@server2.com:/path/to/folder/"
-)
