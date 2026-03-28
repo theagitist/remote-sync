@@ -50,7 +50,19 @@ case "${1:-}" in
             echo "File not found: $FILEPATH"
             exit 1
         fi
-        viu "$FILEPATH"
+        viu --blocks "$FILEPATH"
+        ;;
+    --view-latest)
+        if ! command -v viu &>/dev/null; then
+            echo "Error: 'viu' is not installed. Install it with: cargo install viu"
+            exit 1
+        fi
+        FILE=$(list_files | head -n 1)
+        if [ -z "$FILE" ]; then
+            echo "No files found."
+            exit 1
+        fi
+        viu --blocks "$SYNC_DIR/$FILE"
         ;;
     *)
         cat <<USAGE
@@ -62,6 +74,7 @@ Commands:
   --search TERM   Find files by name
   --count         Show total number of files
   --view [FILE]   View an image in the terminal (default: latest)
+  --view-latest   Quick preview of the latest screenshot
 
 Set REMOTE_SYNC_DIR to override the sync directory (defaults to script location).
 USAGE

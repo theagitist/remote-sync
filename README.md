@@ -19,6 +19,7 @@ Place `rsh.sh` in the directory you want to browse, then:
 ./rsh.sh --count         # Total number of files
 ./rsh.sh --view          # View the latest image in the terminal (requires viu)
 ./rsh.sh --view foo.png  # View a specific image
+./rsh.sh --view-latest   # Quick preview of the latest screenshot
 ```
 
 Set `REMOTE_SYNC_DIR` to override the target directory (defaults to the script's location).
