@@ -1,0 +1,13 @@
+# Syncthing API key (Settings > API Key in the Syncthing GUI)
+ST_API_KEY="your-api-key-here"
+
+# Folder ID to watch (shown in Syncthing GUI under the folder name)
+ST_FOLDER_ID="screenshots"
+
+# Syncthing API URL (default: http://localhost:8384)
+# ST_URL="http://localhost:8384"
+
+# Notification settings
+# ST_NOTIFY_TITLE="Syncthing"
+# ST_NOTIFY_MESSAGE="Screenshot synced to remote"
+# ST_NOTIFY_SOUND="Glass"
